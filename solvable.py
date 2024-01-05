@@ -15,18 +15,7 @@ def count_inversions(puzzle):
                 inversions += 1
     return inversions
 
+
 def is_solvable(puzzle):
     #wenn die Inversion gerade ist, dann ist das Puzzle Lösbar-j
     return count_inversions(puzzle) % 2 == 0
-
-# Beispiel für ein puzzle
-puzzle = [[1, 8, 2], [0, 4, 3], [7, 6, 5]]
-
-#testen
-if is_solvable(puzzle):
-    print("Yes, the puzzle is solvable")
-else:
-    print("It is not solvable")
-
-
-
