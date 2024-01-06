@@ -1,5 +1,6 @@
 # solver.py
 import heapq
+from manhattan import manhattan_distance
 from solvable import is_solvable
 
 GOAL_STATE = [[1, 2, 3], [4, 5, 6], [7, 8, 0]]
@@ -74,6 +75,15 @@ def a_star(initial_state, heuristic):
     while heap:
         cost, current_state, path = heapq.heappop(heap)
 
+        # #debugging for current state
+        # print("Current state:")
+        # print(current_state.state)
+        # print("Steps so far:")
+        # for step in path:
+        #     print(step[0].state, "->", step[1].state)
+        # print("--------------------")
+        # brauche ich doch nicht :/
+
         if current_state.state == GOAL_STATE:
             return True, path
 
@@ -89,3 +99,8 @@ def a_star(initial_state, heuristic):
             heapq.heappush(heap, (priority, neighbor, path + [(current_state, neighbor)]))
 
     return False, []
+
+def manhattan_heuristic(state):
+    return manhattan_distance(state.state)
+
+

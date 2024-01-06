@@ -10,14 +10,14 @@ def manhattan_distance(puzzle):
                 x, y = divmod(puzzle[i][j] - 1, size)
                 # Distanz zur Zielposition addieren
                 distance += abs(x - i) + abs(y - j)
-    print(puzzle[i][j])
+    #print(puzzle[i][j])
     return distance
 
 # Testen der Funktion
-puzzle = [[1, 8, 2], [0, 4, 3], [7, 6, 5]]
+# puzzle = [[1, 8, 2], [0, 4, 3], [7, 6, 5]]
 
-if is_solvable(puzzle):
-    print("Manhattan distance:", manhattan_distance(puzzle))
-else:
-    print("It is not solvable")
+# if is_solvable(puzzle):
+#     print("Manhattan distance:", manhattan_distance(puzzle))
+# else:
+#     print("It is not solvable")
 

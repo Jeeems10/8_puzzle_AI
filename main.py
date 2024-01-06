@@ -1,5 +1,6 @@
 # main.py
-from solver import a_star, hamming_heuristic, PuzzleState
+from manhattan import manhattan_distance
+from solver import a_star, hamming_heuristic, manhattan_heuristic, PuzzleState
 from solvable import is_solvable
 
 
@@ -29,16 +30,31 @@ def main():
 
     print("The initial state is solvable.")
 
-    # Run A* algorithm with Hamming heuristic
-    goal_reached, path = a_star(initial_state, hamming_heuristic)
+    #choose a heuristic
+    print("Choose the heuristic: 1 for Hamming, 2 for Manhattan")
+    choice = input("Your choice: ")
+    if choice == "1":
+        heuristic = hamming_heuristic
+    elif choice == "2":
+        heuristic = manhattan_heuristic
+        print("Manhattan distance of the initial state:", manhattan_distance(initial_state))
+    else:
+        print("Invalid choice. Default ist Hamming heuristic.")
+        heuristic = hamming_heuristic
+
+    #Run A* algorithm with chosen heuristic
+    goal_reached, path = a_star(initial_state, heuristic)
 
     if goal_reached:
         print("Goal state reached!")
-        print("Steps taken:")
-        for idx, step in enumerate(path):
-            if idx == 0:
-                print_puzzle(step[0].state)
-            print_puzzle_diff(step[1].state)
+        if not path:
+            print("No steps required. The initial state is the goal state.")
+        else:
+            print("Steps taken:")
+            for idx, step in enumerate(path):
+                if idx == 0:
+                    print_puzzle(step[0].state)
+                print_puzzle_diff(step[1].state)
     else:
         print("Goal state not reached.")
 
