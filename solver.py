@@ -1,6 +1,5 @@
 # solver.py
 import heapq
-from manhattan import manhattan_distance
 from solvable import is_solvable
 
 GOAL_STATE = [[1, 2, 3], [4, 5, 6], [7, 8, 0]]
@@ -67,6 +66,27 @@ def swap(state, row1, col1, row2, col2):
     new_state[row1][col1], new_state[row2][col2] = new_state[row2][col2], new_state[row1][col1]
     return new_state
 
+def manhattan_distance(puzzle):
+    distance = 0
+    size = len(puzzle)  # Größe des 2 dimensionalen Puzzles ist 3
+    for i in range(size):
+        for j in range(size):
+            if puzzle[i][j] != 0:  # Ignoriert 0
+
+                # Zielposition der aktuellen Zahl finden
+                x, y = divmod(puzzle[i][j] - 1, size)
+                # Distanz zur Zielposition addieren
+                distance += abs(x - i) + abs(y - j)
+    #print(puzzle[i][j])
+    return distance
+
+# Testen der Funktion
+# puzzle = [[1, 8, 2], [0, 4, 3], [7, 6, 5]]
+
+# if is_solvable(puzzle):
+#     print("Manhattan distance:", manhattan_distance(puzzle))
+# else:
+#     print("It is not solvable")
 
 def a_star(initial_state, heuristic):
     heap = [(0, PuzzleState(initial_state), [])]

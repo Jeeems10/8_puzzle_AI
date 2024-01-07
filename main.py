@@ -1,6 +1,5 @@
 # main.py
-from manhattan import manhattan_distance
-from solver import a_star, hamming_heuristic, manhattan_heuristic, PuzzleState
+from solver import a_star, hamming_heuristic, manhattan_heuristic, PuzzleState, manhattan_distance
 from solvable import is_solvable
 
 
