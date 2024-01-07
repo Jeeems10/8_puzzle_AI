@@ -1,6 +1,19 @@
 # main.py
 from solver import a_star, hamming_heuristic, manhattan_heuristic, PuzzleState, manhattan_distance
 from solvable import is_solvable
+import random
+
+
+def generate_solvable_puzzle():
+    while True:
+        # Generate a random initial state
+        numbers = list(range(9))
+        random.shuffle(numbers)
+        initial_state = [numbers[i:i + 3] for i in range(0, 9, 3)]
+
+        # Check if the generated puzzle is solvable
+        if is_solvable(initial_state):
+            return initial_state
 
 
 def print_puzzle_diff(current_state):
@@ -16,6 +29,7 @@ def print_puzzle(state):
 
 def main():
     # Input initial state from the user
+    """
     print("Enter the initial state:")
     initial_state = []
     for i in range(3):
@@ -29,7 +43,11 @@ def main():
 
     print("The initial state is solvable.")
 
-    #choose a heuristic
+    """
+
+    initial_state = generate_solvable_puzzle()
+
+    # choose a heuristic
     print("Choose the heuristic: 1 for Hamming, 2 for Manhattan")
     choice = input("Your choice: ")
     if choice == "1":
@@ -41,7 +59,7 @@ def main():
         print("Invalid choice. Default ist Hamming heuristic.")
         heuristic = hamming_heuristic
 
-    #Run A* algorithm with chosen heuristic
+    # Run A* algorithm with chosen heuristic
     goal_reached, path = a_star(initial_state, heuristic)
 
     if goal_reached:
